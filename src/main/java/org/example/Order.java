@@ -11,7 +11,8 @@ public class Order {
     public Order(long id, char side, double price, long size) {
         Objects.requireNonNull(id, "The order must have an id");
         Objects.requireNonNull(side, "The order must have a side");
-        if(side != 'B' && side != 'O') throw new IllegalArgumentException("the order's side is invalid");
+        if(side != 'B' && side != 'O') throw new IllegalArgumentException("The order's side is invalid");
+        if(size < 0) throw new IllegalArgumentException("The order's size is invalid");
 
         this.id = id;
         this.side = side;
