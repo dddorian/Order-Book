@@ -1,0 +1,12 @@
+Improvement suggestions for the Mizuho Order Book
+
+Order class:
+1.	Use a record instead of a standard java class. Records are inherently immutable and remove a lot of the boiler plate code related to Java data objects. In addition, records are optimized for serialization and deserialization, are easier to debug and provide better performance (low memory footprint)
+2.	Have the creation timestamp as part of the Order class to remove the need for the TimedOrder wrapper class
+
+OrderBook class:
+1.	Use concurrent collections to make the OrderBook class thread safe. Use ConcurrentHashMap instead of Map and PriorityBlockingQueue instead of Priorityqueue.
+2.	Use explicit locking (ReentrantLock) within the data mutating methods addOrder, RemoveOrder and ModifyOrder in order to further enforce thread safety while avoiding the performance cost of full synchronization.
+3.	Sharding and partitioning techniques could be used to break the order book into multiple segments. This improves horizontal scalability of the cache reduces access contention to the same records.
+
+
