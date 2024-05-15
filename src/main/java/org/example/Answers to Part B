@@ -8,5 +8,6 @@ OrderBook class:
 1.	Use concurrent collections to make the OrderBook class thread safe. Use ConcurrentHashMap instead of Map and PriorityBlockingQueue instead of Priorityqueue.
 2.	Use explicit locking (ReentrantLock) within the data mutating methods addOrder, RemoveOrder and ModifyOrder in order to further enforce thread safety while avoiding the performance cost of full synchronization.
 3.	Sharding and partitioning techniques could be used to break the order book into multiple segments. This improves horizontal scalability of the cache reduces access contention to the same records.
-
+4.  Use optionalDouble and OptionalLong as return types for the methods getPriceForLevel and getSizeAtLevel. this simplifies the null handling logic in the caller's code
+5.  Use the BigDecimal type for prices instead of double. This allows higher precision in the calculations however with a slight performance cost.
 
