@@ -56,9 +56,10 @@ public class OrderBook {
     }
 
     public double getPriceForLevel(char side, int level) {
-        if(level == 0) throw new IllegalArgumentException("The level value must be a strictly positive integer");
+        if (level == 0) throw new IllegalArgumentException("The level value must be a strictly positive integer");
 
         Map<Double, PriorityQueue<TimedOrder>> sideOrdersByPrice = orderCategoryBySide.get(side);
+        if(sideOrdersByPrice ==null) return 0.0;
 
         if (level > sideOrdersByPrice.size()) {
             throw new IllegalArgumentException("The order book contains less than " + level + " levels");
@@ -66,12 +67,14 @@ public class OrderBook {
 
         Set<Double> priceSet = sideOrdersByPrice.keySet();
         Double[] priceArray = priceSet.toArray(new Double[priceSet.size()]);
-        return priceArray[level -1];
+        return priceArray[level - 1];
     }
 
     public long getSizeAtLevel(char side, int level) {
 
         Map<Double, PriorityQueue<TimedOrder>> sideOrdersByPrice = orderCategoryBySide.get(side);
+        if (sideOrdersByPrice == null) return 0L;
+
 
         if (level > sideOrdersByPrice.size()) {
             throw new IllegalArgumentException("The order book contains less than " + level + "levels");
